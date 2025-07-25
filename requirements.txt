@@ -1,1 +1,4 @@
-
+```txt
+selenium
+webdriver-manager
+googletrans==4.0.0-rc1
