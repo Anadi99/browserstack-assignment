@@ -15,7 +15,7 @@ soup = BeautifulSoup(response.text, "html.parser")
 headlines = soup.find_all("h2")
 
 article_data = []
-for h in headlines[:10]:  # Top 10 for demo
+for h in headlines[:10]:  # Top 10 for demo purposes
     title = h.get_text(strip=True)
     article_data.append({"title": title})
 
@@ -26,7 +26,7 @@ english_titles = []
 for article in article_data:
     translated = translator.translate(article["title"], src='es', dest='en')
     english_titles.append(translated.text)
-    print("📰", translated.text)
+    print("Title (Translated):", translated.text)
 
 # Step 3: Analyze Words
 words = []
@@ -36,7 +36,7 @@ for title in english_titles:
 word_counts = Counter(words)
 repeated = {word: count for word, count in word_counts.items() if count > 1}
 
-print("\n📊 Repeated Words:")
+print("\nRepeated Words:")
 for word, count in repeated.items():
     print(f"{word}: {count}")
 
@@ -53,11 +53,11 @@ def run_browserstack_test(bstack_options, browser_name):
     try:
         driver = webdriver.Remote(command_executor=remote_url, options=options)
         driver.get("https://elpais.com/")
-        print(f"✅ Page title on {bstack_options.get('sessionName')}: {driver.title}")
+        print(f"Page title on {bstack_options.get('sessionName')}: {driver.title}")
         time.sleep(5)
         driver.quit()
     except Exception as e:
-        print(f"❌ Error on {bstack_options.get('sessionName')}: {e}")
+        print(f"Error on {bstack_options.get('sessionName')}: {e}")
 
 # Define capabilities
 capabilities_list = [
